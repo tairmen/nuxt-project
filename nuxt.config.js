@@ -46,10 +46,14 @@ export default {
   */
   buildModules: [
     // Simple usage
-    '@nuxtjs/vuetify',
+    // '@nuxtjs/vuetify',
 
     // With options
-    ['@nuxtjs/vuetify', { /* module options */ }]
+    ['@nuxtjs/vuetify', {
+      theme: {
+        dark: true,
+      },
+    }]
   ],
   /*
   ** Nuxt.js modules
