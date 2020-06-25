@@ -1,32 +1,56 @@
 <template>
   <v-card class="mx-auto">
-    <v-list shaped>
+    <v-list three-line shaped>
       <v-subheader>Signals</v-subheader>
-      <v-list-item-group v-model="item" color="primary">
+      <v-list-item-group class="list" v-model="item" color="primary">
         <v-list-item v-for="(item, i) in items" :key="i">
           <v-list-item-icon>
-            <v-icon v-text="item.icon"></v-icon>
+            <v-icon>mdi-email</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title v-text="item.text"></v-list-item-title>
+            <v-list-item-title v-text="item.title"></v-list-item-title>
+            <v-list-item-subtitle v-text="item.body.slice(0, 150)"></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
     </v-list>
+    <div class="text-center">
+      <v-pagination v-model="page" :length="totalPages" :total-visible="8"></v-pagination>
+    </div>
   </v-card>
 </template>
 <script>
 export default {
-  data: () => ({
-    item: 1,
-    items: [
-      { text: "Real-Time", icon: "mdi-clock" },
-      { text: "Audience", icon: "mdi-account" },
-      { text: "Conversions", icon: "mdi-flag" }
-    ]
-  })
+  data: () => {
+    return {
+      item: 1,
+      items: [],
+      data: [],
+      totalPages: 0,
+      page: 1,
+      pageSize: 2,
+    };
+  },
+  watch: {
+    page(p) {
+      let me = this;
+      me.items = me.data.slice((p - 1) * me.pageSize, (p - 1) * me.pageSize + 2);
+    }
+  },
+  created() {
+    let me = this;
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then(response => response.json())
+      .then(json => {
+        me.data = json;
+        me.totalPages = me.data.length / me.pageSize;
+        me.items = me.data.slice(0, me.pageSize);
+      });
+  }
 };
 </script>
 <style scoped>
-
+.list {
+  overflow: auto;
+}
 </style>

@@ -1,58 +1,58 @@
 <template>
-  <v-app :dark="setTheme" id="inspire">
-    <div>
-      <v-app-bar color="dark" dense dark>
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>Page title</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn icon @click="heartClick">
-          <v-icon>mdi-heart</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
-      </v-app-bar>
-      <v-navigation-drawer v-model="drawer" absolute left temporary>
-        <v-list nav dense>
+  <v-app :dark="setTheme">
+    <v-navigation-drawer v-model="drawer" absolute left temporary app>
+      <v-list nav dense>
+        <v-list-item>
+          <v-list-item-title>Tarif</v-list-item-title>
+        </v-list-item>
+        <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
           <v-list-item>
-            <v-list-item-title>Tarif</v-list-item-title>
+            <v-list-item-title>One</v-list-item-title>
           </v-list-item>
-          <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
-            <v-list-item>
-              <v-list-item-title>One</v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-title>Two</v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-title>Three</v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-title>Four</v-list-item-title>
-            </v-list-item>
-          </v-list-item-group>
           <v-list-item>
-            <v-switch v-model="goDark" :label="goDark ? `dark` : `light`"></v-switch>
+            <v-list-item-title>Two</v-list-item-title>
           </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-      <v-main>
-        <div class="main-content">
-          <div class="company-panel">
-            <CompanyCard />
-          </div>
-          <div class="statistic-panel">
-            <StatisticCard />
-          </div>
-          <div class="signals-panel">
-            <SignalsCard />
-          </div>
-          <div class="messages-panel">
-            <MessagesCard />
-          </div>
+          <v-list-item>
+            <v-list-item-title>Three</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Four</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+        <v-list-item>
+          <v-switch v-model="goDark" :label="goDark ? `dark` : `light`"></v-switch>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar color="dark" dense dark app>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Page title</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn icon @click="heartClick">
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <div class="main-content">
+        <div class="company-panel">
+          <CompanyCard />
         </div>
-      </v-main>
-    </div>
+        <div class="statistic-panel">
+          <StatisticCard />
+        </div>
+        <div class="signals-panel">
+          <SignalsCard />
+        </div>
+        <div class="messages-panel">
+          <MessagesCard />
+        </div>
+      </div>
+    </v-main>
   </v-app>
 </template>
 
@@ -92,10 +92,11 @@ export default {
 <style scoped>
 .main-content {
   display: grid;
+  height: 95%;
   margin: 10px;
   grid-gap: 10px;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 25% 35% 35%;
+  grid-template-rows: 22% 32% 38%;
 }
 .company-panel {
   grid-row: 1 / 4;
