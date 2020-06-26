@@ -1,14 +1,14 @@
 <template>
   <v-card class="mx-auto" height="100%">
-    <v-list-item>
+    <v-list-item class="top-items">
       <v-list-item-avatar color="grey"></v-list-item-avatar>
       <v-list-item-content>
-        <v-list-item-title class="headline">Sportlife</v-list-item-title>
+        <v-list-item-title class="headline">{{name}}</v-list-item-title>
       </v-list-item-content>
       <v-list-item-action>
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn color="grey" dark v-bind="attrs" v-on="on">Settings</v-btn>
+            <v-btn v-bind="attrs" v-on="on">Settings</v-btn>
           </template>
           <v-list>
             <v-list-item
@@ -22,32 +22,60 @@
         </v-menu>
       </v-list-item-action>
     </v-list-item>
-    <v-img src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg" height="194"></v-img>
+    <v-img class="center-image" :src="image" height="200"></v-img>
 
     <v-card-text>
-      <div class="my-4 subtitle-1">Tarif</div>
-      <div class="my-4 subtitle-2">Use</div>
-      <div class="my-4 subtitle-2">Use</div>
-      <div>{{text}}</div>
+      <v-form>
+        <v-container>
+          <v-row>
+            <v-col cols="12" sm="8" md="6">
+              <v-text-field hide-details label="Description" :value="description" outlined></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="8" md="6">
+              <v-text-field hide-details label="Manager" :value="manager" outlined></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="8" md="6">
+              <v-text-field hide-details label="Phone" :value="phone" outlined></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="8" md="6">
+              <v-text-field hide-details label="Email" :value="email" outlined></v-text-field>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-form>
     </v-card-text>
-    <v-card-actions>
-      <v-btn text color="deep-grey accent-4">Read</v-btn>
-      <v-btn text color="deep-grey accent-4">Bookmark</v-btn>
-      <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-      <v-btn icon>
-        <v-icon>mdi-share-variant</v-icon>
-      </v-btn>
-    </v-card-actions>
   </v-card>
 </template>
 <script>
 export default {
+  props: {
+    name: {
+      type: String,
+      default: ""
+    },
+    description: {
+      type: String,
+      default: ""
+    },
+    manager: {
+      type: String,
+      default: ""
+    },
+    phone: {
+      type: String,
+      default: ""
+    },
+    email: {
+      type: String,
+      default: ""
+    },
+    image: {
+      type: String,
+      default: "https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+    }
+  },
   data() {
     return {
-      text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
       settingsItems: [
         { title: "Setting 1" },
         { title: "Setting 2" },
@@ -64,4 +92,15 @@ export default {
 };
 </script>
 <style scoped>
+.center-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.top-items {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
 </style>

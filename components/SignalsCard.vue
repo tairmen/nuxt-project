@@ -9,7 +9,7 @@
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title v-text="item.title"></v-list-item-title>
-            <v-list-item-subtitle v-text="item.body.slice(0, 150)"></v-list-item-subtitle>
+            <v-list-item-subtitle v-text="item.body"></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
@@ -28,16 +28,19 @@ export default {
       data: [],
       totalPages: 0,
       page: 1,
-      pageSize: 2,
+      pageSize: 2
     };
   },
   watch: {
     page(p) {
       let me = this;
-      me.items = me.data.slice((p - 1) * me.pageSize, (p - 1) * me.pageSize + 2);
+      me.items = me.data.slice(
+        (p - 1) * me.pageSize,
+        (p - 1) * me.pageSize + 2
+      );
     }
   },
-  created() {
+  async created() {
     let me = this;
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then(response => response.json())
@@ -46,6 +49,8 @@ export default {
         me.totalPages = me.data.length / me.pageSize;
         me.items = me.data.slice(0, me.pageSize);
       });
+    let data = await me.$store.dispatch("getData");
+    console.log(data);
   }
 };
 </script>
