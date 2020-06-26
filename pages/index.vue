@@ -2,7 +2,7 @@
   <v-main>
     <div class="main-content">
       <div class="company-panel">
-        <CompanyCard />
+        <MainInfoCard name="SportLife" text="Lorem" />
       </div>
       <div class="statistic-panel">
         <StatisticCard />
@@ -27,8 +27,8 @@ export default {};
   height: 95%;
   margin: 10px;
   grid-gap: 10px;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 22% 32% 38%;
+  grid-template-columns: 40% 1fr;
+  grid-template-rows: 26% 32% 35%;
 }
 .company-panel {
   grid-row: 1 / 4;

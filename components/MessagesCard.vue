@@ -1,12 +1,19 @@
 <template>
   <v-card class="mx-auto">
-    <v-list three-line shaped>
-      <v-subheader>Messages</v-subheader>
+    <v-list>
+      <v-list-item-group>
+        <v-list-item class="title-item">
+          <v-list-item-content>
+            <v-list-item-title>Messages</v-list-item-title>
+          </v-list-item-content>
+           <v-list-item-icon>
+            <v-icon>mdi-chevron-right</v-icon>
+          </v-list-item-icon>
+        </v-list-item>
+      </v-list-item-group>
       <v-list-item-group v-model="item" color="primary">
         <v-list-item v-for="(item, i) in items" :key="i">
-          <v-list-item-avatar>
-            <v-img :src="item.url"></v-img>
-          </v-list-item-avatar>
+          <v-img :src="item.url" max-width="3" min-height="40"></v-img>
           <v-list-item-content>
             <v-list-item-title v-text="item.title"></v-list-item-title>
           </v-list-item-content>
@@ -21,7 +28,7 @@
 <script>
 export default {
   data: () => ({
-    item: 1,
+    item: -1,
     items: [],
     data: [],
     totalPages: 1,
@@ -38,13 +45,12 @@ export default {
     }
   },
   created() {
-    let me = this;
     fetch("https://jsonplaceholder.typicode.com/photos")
       .then(response => response.json())
       .then(json => {
-        me.data = json;
-        me.totalPages = me.data.length / me.pageSize;
-        me.items = me.data.slice(0, me.pageSize);
+        this.data = json;
+        this.totalPages = this.data.length / this.pageSize;
+        this.items = this.data.slice(0, this.pageSize);
       });
   }
 };
@@ -53,10 +59,14 @@ export default {
 .v-list-item__content {
   height: 50px !important;
 }
-.v-list-item__avatar {
-  margin: 5px 15px !important;
+.v-image {
+  margin: 2px 15px 5px 2px !important;
 }
 .v-list-item {
   min-height: 30px !important;
+}
+.title-item {
+  min-height: 30px !important;
+  height: 45px;
 }
 </style>

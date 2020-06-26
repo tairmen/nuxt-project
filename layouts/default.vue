@@ -1,7 +1,16 @@
 <template>
   <v-app :dark="setTheme">
-    <v-navigation-drawer v-model="drawer" permanent app :mini-variant="mini" mini-variant-width="60">
+    <v-navigation-drawer
+      v-model="drawer"
+      permanent
+      app
+      :mini-variant="mini"
+      mini-variant-width="70"
+    >
       <v-list nav dense>
+        <v-list-item>
+          <v-list-item-title>ADVISOR</v-list-item-title>
+        </v-list-item>
         <v-list-item>
           <v-list-item-title>MY PROFILE</v-list-item-title>
         </v-list-item>
@@ -26,21 +35,40 @@
           </v-list-item>
         </v-list-item-group>
         <v-list-item>
-          <v-switch v-model="goDark" :label="goDark ? `dark` : `light`"></v-switch>
+          <v-switch v-model="goDark" class="theme-switch"></v-switch>
+          <v-list-item-title>{{goDark ? `Dark` : `Light`}}</v-list-item-title>
+          <!-- <v-switch v-model="goDark" :label="goDark ? `dark` : `light`"></v-switch> -->
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar color="dark" dense dark app>
+    <v-app-bar dense app height="65">
       <v-app-bar-nav-icon @click.stop="mini = !mini"></v-app-bar-nav-icon>
-      <v-toolbar-title>Page title</v-toolbar-title>
+      <v-toolbar-title>{{pageName}}</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon @click="heartClick">
-        <v-icon>mdi-heart</v-icon>
+      <v-btn icon>
+        <v-icon>mdi-headphones-settings</v-icon>
       </v-btn>
       <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon>mdi-bell</v-icon>
       </v-btn>
+      <v-btn icon>
+        <v-icon>mdi-email</v-icon>
+      </v-btn>
+      <v-btn icon>
+        <v-icon>mdi-cog</v-icon>
+      </v-btn>
+      <v-list width="150" height="61">
+        <v-list-item style="height: 48px" @click="userAvatarClick">
+          <v-list-item-avatar>
+            <v-img src="https://cdn.vuetifyjs.com/images/lists/1.jpg"></v-img>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>User</v-list-item-title>
+            <v-list-item-subtitle>Manager</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
     </v-app-bar>
 
     <nuxt />
@@ -58,6 +86,9 @@ export default {
       } else {
         return (this.$vuetify.theme.dark = false);
       }
+    },
+    pageName() {
+      return this.$store.state.pageName;
     }
   },
   data: () => ({
@@ -71,17 +102,19 @@ export default {
       this.drawer = false;
     }
   },
+  created() {
+    this.$store.commit("setPageName", "Консоль");
+  },
   methods: {
-    heartClick() {
-      this.$store.commit("increment");
-      console.log(this.counter);
-    },
     gotoCompany() {
-      this.$router.push('/')
+      this.$router.push("/");
+      this.$store.commit("setPageName", "Консоль");
     },
     gotoHubs() {
-      this.$router.push('/locations')
-    }
+      this.$router.push("/locations");
+      this.$store.commit("setPageName", "Локации");
+    },
+    userAvatarClick() {}
   }
 };
 </script>
@@ -96,5 +129,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+.theme-switch {
+  margin: 15px 20px 0px 0px;
 }
 </style>

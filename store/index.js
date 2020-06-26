@@ -1,12 +1,13 @@
 import axios from 'axios'
 
 export const state = () => ({
-    counter: 0
+    pageName: '',
+
 })
 
 export const mutations = {
-    increment(state) {
-        state.counter++
+    setPageName(state, name) {
+        state.pageName = name;
     }
 }
 
